@@ -19,7 +19,7 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col p-24">
+		<main className="flex min-h-screen flex-col lg:p-24 p-4">
 			<input
 				type="text"
 				placeholder="Filter states..."
