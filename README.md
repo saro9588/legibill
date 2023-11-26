@@ -1,4 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LegiBill
+
+## About
+I made LegiBill to explore NextJS 14's and React's latest features including Next Auth, Next Storage, Server Components, and React Suspense!
+
+LegiBill consumes data from the [LegiScan API](https://legiscan.com). 
 
 ## Getting Started
 
