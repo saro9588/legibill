@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Nav from './nav';
 import { getServerSession } from 'next-auth';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +24,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Nav session={!!session}/>
         <div className='p-4 bg-gray-200 min-h-screen'>
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </div>
       </body>
     </html>

@@ -16,11 +16,9 @@ export default function Form() {
         })
 
         if(!response?.error) {
-            router.push('/');
+            router.push(new URLSearchParams(window.location.search).get('callbackUrl') || '/');
             router.refresh();
         }
-
-
     }
     return(
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 mx-auto max-w-md">

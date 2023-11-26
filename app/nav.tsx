@@ -25,6 +25,15 @@ export default function Nav({session}: {session: boolean}) {
                         Contact
                     </Link>
                 </li>
+                {
+                    session && (
+                        <li className='hover:text-blue-500 hover:cursor-pointer'>
+                            <Link href={'/dashboard'}>
+                                Dashboard
+                            </Link>
+                        </li>
+                    )
+                }
             </ul>
             <ul className='flex flex-row gap-2'>
                 {
