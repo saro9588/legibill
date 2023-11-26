@@ -31,8 +31,8 @@ export default function Home() {
 				{
 					filteredStates.map((state, index) => {
 						return (
-							<li key={index} className="col-span-1 p-2 flex rounded-md shadow-sm hover:bg-gray-900 hover:text-gray-200 transition-colors">
-								<Link href={`/state/${state.abbreviation}`}>
+							<li key={index} >
+								<Link className="col-span-1 p-2 flex rounded-md shadow-sm hover:bg-gray-900 hover:text-gray-200 transition-colors" href={`/state/${state.abbreviation}`}>
 									{state.name}
 								</Link>
 							</li>
