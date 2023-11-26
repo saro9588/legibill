@@ -1,15 +1,14 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
-
-export default function Nav() {
+import { signOut } from 'next-auth/react';
+export default function Nav({session}: {session: boolean}) {
     const pathname = usePathname()
     const isActive = (path: string) => {
         return pathname === path;
     };
-
     return (
-        <nav className="bg-gray-900 p-4 text-gray-200">
+        <nav className="bg-gray-900 p-4 text-gray-200 flex flex-row justify-between">
             <ul className="flex gap-2">
                 <li className={isActive('/') ? 'text-blue-500' : ''}>
                     <Link href="/" className={isActive('/') ? 'hover:text-blue-600 text-blue-500' : 'hover:text-blue-600'}>
@@ -26,6 +25,37 @@ export default function Nav() {
                         Contact
                     </Link>
                 </li>
+            </ul>
+            <ul className='flex flex-row gap-2'>
+                {
+                    session && (
+                        <li className='hover:text-blue-500 hover:cursor-pointer'>
+                            <span onClick={() => {
+                                signOut()
+                            }}>
+                                Logout
+                            </span>
+                        </li>
+                    )
+                }
+                {
+                    !session && (
+                        <li className='hover:text-blue-500 hover:cursor-pointer'>
+                            <Link href={'/login'}>
+                                Login
+                            </Link>
+                        </li>
+                    )
+                }
+                {
+                    !session && (
+                        <li className='hover:text-blue-500 hover:cursor-pointer'>
+                            <Link href={'/register'}>
+                                Register
+                            </Link>
+                        </li>
+                    )
+                }
             </ul>
         </nav>
     );
