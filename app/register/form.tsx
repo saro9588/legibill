@@ -2,9 +2,12 @@
 
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation"
+import { useState } from "react";
 
 export default function Form() {
     const router = useRouter()
+    const [errorMessage, setErrorMessage] = useState("");
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
@@ -16,8 +19,13 @@ export default function Form() {
             })
         })
 
-        if(response?.ok) {
-            router.push('/login');
+    if (response.ok) {
+        router.push("/login");
+        } else {
+          const data = await response.json();
+          if (data?.error) {
+            setErrorMessage(data.error); // Set error message from API response
+          }
         }
     }
     return(
@@ -28,6 +36,7 @@ export default function Form() {
                 <input name="email" className="border border-black" type="email" required={true}/>
                 <label>Password</label>
                 <input name="password" className="border border-black"  type="password" required={true}/>
+                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                 <button type="submit">Submit</button>
             </form>
         </>
