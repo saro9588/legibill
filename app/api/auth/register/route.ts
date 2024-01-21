@@ -11,9 +11,9 @@ export async function POST(request: Request) {
         `;
         const userExists = data.rows.length > 0;
         if (userExists) {
-          return NextResponse.json(
-            { error: "User with provided email already exists." },
-            { status: 400 } // Bad request status code
+            return NextResponse.json(
+                { error: "An error occurred. Please try again later." },
+                { status: 500 } 
           );
         }
         const hashedPassword = await hash(password, 10)
