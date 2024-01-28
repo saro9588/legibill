@@ -1,11 +1,13 @@
 'use client'
 
-import { FormEvent } from "react"
+import { FormEvent, useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 export default function Form() {
     const router = useRouter()
+    const [error, setError] = useState("");
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
@@ -15,18 +17,20 @@ export default function Form() {
             redirect: false,
         })
 
-        if(!response?.error) {
-            router.push(new URLSearchParams(window.location.search).get('callbackUrl') || '/');
-            router.refresh();
+   if (response?.error) {
+      {
+        setError("Invalid email/password.");
+      }
         }
     }
     return(
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 mx-auto max-w-md">
             <h1 className="text-xl">Login to an existing Account</h1>
             <label>Email</label>
-            <input name="email" className="border border-black" type="email"/>
+            <input name="email" className="border border-black" type="email" required={true}/>
             <label>Password</label>
-            <input name="password" className="border border-black"  type="password"/>
+            <input name="password" className="border border-black"  type="password" required={true}/>
+            {error && <p className="text-red-500">{error}</p>}
             <button type="submit">Submit</button>
         </form>
     )
