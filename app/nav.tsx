@@ -27,7 +27,7 @@ export default function Nav({session}: {session: boolean}) {
                 </li>
                 {
                     session && (
-                        <li className={isActive('/contact') ? 'text-blue-500' : ''}>
+                        <li className={isActive('/dashboard') ? 'text-blue-500' : ''}>
                             <Link href={'/dashboard'}>
                                 Dashboard
                             </Link>
